@@ -38,7 +38,7 @@ it depends on mongoose and your environment support async functions.
    the four params must be specified. if you don not need ,just specify
        it as null.
                           
-### Set custom default options for all queries 
+### custom 
    <span id='custom'></span>Set custom default options for all queries.this plugin has three default three params,
    lean:true,page:1,row:10.you can specific page and row param like this:
    ````  
