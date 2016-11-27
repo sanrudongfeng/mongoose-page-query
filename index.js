@@ -1,5 +1,6 @@
-function pageQueryPlugin ( schema , opt = {page: 0 , row: 10} ) {
-    schema.statics.pageQuery = async function ( item = opt , condition = {} , projection = {} , option = {} ) {
+function pageQueryPlugin ( schema ) {
+    schema.statics.pageQuery = async function ( item = pageQueryPlugin.pageOpt , condition = {} , projection = {} , option = {} ) {
+        if ( !item.page && !item.row )item = pageQueryPlugin.pageOpt;//支持传递空对象
         if ( typeof item.page != 'number' || typeof item.row != 'number' ) {
             throw('pageQuery method pageParams must be number type');
         }
@@ -29,5 +30,6 @@ function pageQueryPlugin ( schema , opt = {page: 0 , row: 10} ) {
     }
 }
 
+pageQueryPlugin.defaultOption = {page: 0 , row: 10};
 
 module.exports = pageQueryPlugin;

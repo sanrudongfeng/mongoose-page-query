@@ -7,9 +7,9 @@ mongoose.Promise = Promise;
  * ava引入测试框架不支持引入的外部文件之中包含async函数，
  * 将分页函数拷贝过来
  */
-function pageQueryPlugin ( schema ,opt = {page: 0,row: 10}) {
-    schema.statics.pageQuery = async function ( item = opt , condition = {} , projection = {} , option = {} ) {
-        console.log(typeof item.page , typeof item.row);
+function pageQueryPlugin ( schema ) {
+    schema.statics.pageQuery = async function ( item = {} , condition = {} , projection = {} , option = {} ) {
+        if ( !item.page && !item.row )item = pageQueryPlugin.pageOpt;//支持传递空对象
         if ( typeof item.page != 'number' || typeof item.row != 'number' ) {
             throw('pageQuery method pageParams must be number type');
         }
@@ -38,6 +38,9 @@ function pageQueryPlugin ( schema ,opt = {page: 0,row: 10}) {
         return rs;
     }
 }
+pageQueryPlugin.pageOpt = {page: 1 , row: 10};
+
+
 
 const Schema = mongoose.Schema;
 
@@ -46,7 +49,7 @@ const userSchema = new Schema({
     age : Number
 });
 
-
+pageQueryPlugin.pageOpt = {page: 1 , row: 3};
 mongoose.plugin(pageQueryPlugin);
 const User = mongoose.model('User' , userSchema);
 
@@ -92,14 +95,14 @@ test('mongoose-page-query' , async t => {
 
 
 test('mongoose-page-query' , async t => {
-    let userList = await User.pageQuery({page: 1 , row: 0 } , {} , {_id: 0 , __v: 0} , {sort: {age: -1}});
+    let userList = await User.pageQuery({page: 1 , row: 0} , {} , {_id: 0 , __v: 0} , {sort: {age: -1}});
     console.log(userList);
     assert.deepEqual(userList , {
         page : 1 ,
         row  : 10 ,
         rows : [
             {name: 'a2' , age: 5} ,
-            {name: 'a5' , age: 4},
+            {name: 'a5' , age: 4} ,
             {name: 'a1' , age: 3} ,
             {name: 'a4' , age: 2} ,
             {name: 'a3' , age: 1}
