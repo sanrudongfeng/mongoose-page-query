@@ -39,7 +39,7 @@ it depends on mongoose and your environment support async functions.
        it as null.
                           
 ### Set custom default options for all queries 
-   <span id='custom'></span>this plugin has three default three params,
+   <span id='custom'></span>Set custom default options for all queries.this plugin has three default three params,
    lean:true,page:1,row:10.you can specific page and row param like this:
    ````  
       const mongoose = require('mongoose');
