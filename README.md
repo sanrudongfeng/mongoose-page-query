@@ -10,7 +10,7 @@ it depends on mongoose and your environment support async functions.
 
 ### install 
    <span id='install'></span>Install mongoose-page-query like this:
-  `$ npm install --global ava`
+  `$ npm install --save-dev mongoose-page-query`
   before this you must install mongoose.
 ### usage
   <span id='usage'></span>use it as global plugin for every schema in mongoose when you connect databases.
