@@ -1,9 +1,5 @@
-function pageQueryPlugin ( schema ) {
-    schema.statics.pageQuery = async function ( item = {
-        page: 0 ,
-        row : 10
-    } , condition = {} , projection = {} , option = {} ) {
-        console.log(typeof item.page,typeof item.row);
+function pageQueryPlugin ( schema , opt = {page: 0 , row: 10} ) {
+    schema.statics.pageQuery = async function ( item = opt , condition = {} , projection = {} , option = {} ) {
         if ( typeof item.page != 'number' || typeof item.row != 'number' ) {
             throw('pageQuery method pageParams must be number type');
         }
@@ -32,8 +28,6 @@ function pageQueryPlugin ( schema ) {
         return rs;
     }
 }
+
+
 module.exports = pageQueryPlugin;
-
-
-var mongoose = require('mongoose');
-mongoose.plugin(pageQueryPlugin);

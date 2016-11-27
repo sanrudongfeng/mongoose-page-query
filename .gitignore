@@ -1,2 +1,7 @@
-node_modules
-.idea
+.idea/
+*.iml
+node_modules/
+.npmrc
+*.log
+test.js
+.eslintrc.js

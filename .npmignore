@@ -4,3 +4,4 @@ node_modules/
 .npmrc
 *.log
 test.js
+.eslintrc.js
