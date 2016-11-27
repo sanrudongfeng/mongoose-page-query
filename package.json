@@ -1,0 +1,11 @@
+{
+  "name": "mongoose-pageQuery-plugin",
+  "version": "0.0.1",
+  "scripts": {
+  },
+  "dependencies": {
+    "mongoose": "^4.7.0"
+  },
+  "devDependencies": {
+  }
+}
